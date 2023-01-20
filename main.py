@@ -1,51 +1,60 @@
-# Karl Paju IS22
+# Karl Paju IS22 ÜL 2 Tekstide ja piltide lisamine
 
-import pygame
+import pygame # Impordib pygame
 
-pygame.init()
+pygame.init() # Käivitab pygame
 
-# Ekraani seaded
-suurus = (1000, 800)
-screen = pygame.display.set_mode(suurus)
-pygame.display.set_caption("Karl Paju IS22 Lisa ül")
-screen.fill([0, 0, 0])
+#Ekraani seaded
 
-# Lisame tausta
-bg = pygame.image.load("happy-boy-and-girl-birthday-cake-on-table-vector-24648349.jpg")
-screen.blit(bg, [0, 0])
-# Logo lisamine
-logo = pygame.image.load("VIKK logo.png")
-logo = pygame.transform.scale(logo, [230, 75])
-screen.blit(logo, [10, 40])
+Screen = pygame.display.set_mode([640,480]) # Ekraani loomine
+pygame.display.set_caption("Karl Paju IS22 ÜL2") # Ekraanile nime andmine
+Screen.fill([204,255,204]) # Täidab ekraani sisestatud värvi hex koodiga.
 
-# Mööga lisamine
-mook = pygame.image.load("Mõõk.png")
-mook = pygame.transform.scale(mook, [250, 125])
-screen.blit(mook, [350, 125])
+#Lisame taustapildid ning muud
+
+# Tausta pildi lisamine
+bg = pygame.image.load("taust.jpg") # Tausta lisamine
+Screen.blit(bg,[0,0]) # Pildi asukoht
+
+#Selleri lisamine ekraanile
+seller = pygame.image.load("seller.png") # Selleri lisamine ekraanile
+seller = pygame.transform.scale(seller, [150,300]) #Selleri laiuse ja pikkuse muutmine
+Screen.blit(seller, [10,120]) # Selleri asukohta  paigaldamine
+
+#Jutumulli lisamine ekraanile
+jutumull = pygame.image.load("jutumull.png") # Jutumulli lisamine ekraanile
+jutumull = pygame.transform.scale(jutumull, [200,200]) # jutumulli laiuse ja pikkuse muutmine
+Screen.blit(jutumull, [150,30]) # jutumulli asukoha paigaldamine
+
+# Teksti lisamine ekraanile
+font = pygame.font.Font(pygame.font.match_font("arial"),15) # Lisab ekraanile teksti
+text = font.render("Tervist, minu nimi on Karl", True, [255,255,255]) # Teksti muutuja ning värv
+
+#Teksti kasti suurus
+text_width = text.get_rect().width # muutuja
+text_height = text.get_rect().height # muutuja
+
+Screen.blit(text, [250-text_width/2,120-text_height/2]) # Ekraanil paigutatakse ära kus asub tekst
+
+#Logo lisamine
+logo = pygame.image.load("TULEVIK 2050 (1).png") # laeb sisse ekraanile logo
+logo = pygame.transform.scale(logo, [220,65]) # määrab logo pikkuse ja laiuse
+Screen.blit(logo, [0,1]) # määrab logo asukoha
+
+#Koogi lisamine
+kook = pygame.image.load("kook.png") # lisab ekraanile koogi
+kook = pygame.transform.scale(kook, [120,70]) # Määrab koogi pikkuse ja laiuse
+Screen.blit(kook, [320,230]) # Määrab koogi asukoha
+
+# Mõõga lisamine
+mook = pygame.image.load("mook.png") # Lisab ekraanile mõõga
+mook = pygame.transform.scale(mook, [110,230]) # Määrab mõõga pikkuse ja laiuse
+Screen.blit(mook, [525,100]) # Määrab mõõga asukoha
+
+pygame.display.flip() # uuendab ekraani
 
 
-# Teksti lisamine
-font = pygame.font.Font(None, 100)
-text = "TULEVIK 2050"
 
-# Render text and get its rect
-text = font.render(text, True, (0, 0, 0))
-text_rect = text.get_rect()
-
-# Center the rect
-text_rect.center = (suurus[0] / 2, suurus[1] / 2)
-
-# Create a new surface for the curved text
-curved_text = pygame.Surface((text_rect.width, text_rect.height), pygame.SRCALPHA)
-
-# Draw the text on the new surface
-curved_text.blit(text, (0, 0))
-
-# Draw the curved text on the screen
-pygame.draw.arc(curved_text, (0, 0, 0), text_rect, 0, 3.14, 1)
-screen.blit(curved_text, text_rect)
-
-pygame.display.flip()
 
 # Loopi loomine
 running = True
